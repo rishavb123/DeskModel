@@ -13,7 +13,7 @@ def add_cube(location=(0, 0, 0), rotation=(0, 0, 0), scale=(1, 1, 1), multiplier
 
 def save():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    bpy.ops.wm.save_as_mainfile(filepath=dir_path + "\\models\\"  + ".".join(os.path.basename(__file__).split(".")[:-1]) + ".blend")
+    bpy.ops.wm.save_as_mainfile(filepath=dir_path + "\\raw_models\\"  + ".".join(os.path.basename(__file__).split(".")[:-1]) + ".blend")
 
 # total dimensions in inches
 w = 24.5
