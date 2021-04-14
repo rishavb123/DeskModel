@@ -1,4 +1,5 @@
 import bpy
+import os
 
 def clear_scene():
     override = bpy.context.copy()
@@ -9,6 +10,10 @@ def add_cube(location=(0, 0, 0), rotation=(0, 0, 0), scale=(1, 1, 1), multiplier
     location = (location[0] * multiplier, location[1] * multiplier, location[2] * multiplier)
     scale = (scale[0] * multiplier, scale[1] * multiplier, scale[2] * multiplier)
     bpy.ops.mesh.primitive_cube_add(location=location, rotation=rotation, scale=scale)
+
+def save():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    bpy.ops.wm.save_as_mainfile(filepath=dir_path + "\\models\\"  + ".".join(os.path.basename(__file__).split(".")[:-1]) + ".blend")
 
 # total dimensions in inches
 w = 24.5
@@ -55,3 +60,5 @@ add_cube(location=(-xsc, -0.9 * d / 2, zsc), scale=scale_sc)
 
 add_cube(location=(xsc, 0.9 * d / 2 - 5.75, zsc), scale=scale_sc)
 add_cube(location=(-xsc, -0.9 * d / 2 + 5.75, zsc), scale=scale_sc)
+
+save()
