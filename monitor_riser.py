@@ -84,6 +84,7 @@ add_cube(location=(-xsc, -0.9 * d / 2 + 5.75, zsc), scale=scale_sc, n="Side Cove
 cylinder_h = 16
 cylinder_r = 0.590551
 add_cylinder(location=(0, 3.5, 6 + cylinder_h / 2), radius=cylinder_r, height=cylinder_h, n="Monitor Arm Base")
+add_cylinder(location=(0, 3.5, 6), radius=2, height=0.3, n="Monitor Arm Holding Plate")
 
 # Monitor Arms
 # add_cube(location=(3 + cylinder_r / 2, 3.5, 18), scale=(6 + cylinder_r, 0.75, 1.25), n="Monitor Arm R1")
