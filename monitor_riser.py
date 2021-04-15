@@ -80,5 +80,112 @@ add_cube(location=(xsc, 0.9 * d / 2 - 5.75, zsc), scale=scale_sc, n="Side Cover 
 add_cube(location=(-xsc, -0.9 * d / 2 + 5.75, zsc), scale=scale_sc, n="Side Cover 6")
 
 
+# Monitor Arms Cylinder
+cylinder_h = 16
+cylinder_r = 0.590551
+add_cylinder(location=(0, 3.5, 6 + cylinder_h / 2), radius=cylinder_r, height=cylinder_h, n="Monitor Arm Base")
+
+# Monitor Arms
+# add_cube(location=(3 + cylinder_r / 2, 3.5, 18), scale=(6 + cylinder_r, 0.75, 1.25), n="Monitor Arm R1")
+# add_cube(location=(9.5 + cylinder_r, 3.5, 18), scale=(7, 0.75, 1.25), n="Monitor Arm R2")
+# add_cube(location=(14 + cylinder_r, 3.5, 18), scale=(2, 0.75, 1.25), n="Monitor Arm R3")
+# add_cube(location=(15 + cylinder_r, 3.5, 18), scale=(0.1, 4.5, 4.5), n="Monitor Arm Plate R")
+
+# add_cube(location=(-3 - cylinder_r / 2, 3.5, 18), scale=(6 + cylinder_r, 0.75, 1.25), n="Monitor Arm R1")
+# add_cube(location=(-9.5 - cylinder_r, 3.5, 18), scale=(7, 0.75, 1.25), n="Monitor Arm R2")
+# add_cube(location=(-14 - cylinder_r, 3.5, 18), scale=(2, 0.75, 1.25), n="Monitor Arm R3")
+# add_cube(location=(-15 - cylinder_r, 3.5, 18), scale=(0.1, 4.5, 4.5), n="Monitor Arm Plate R")
+
+y = 3.5
+z = 18
+
+L1 = 6 + cylinder_r
+L2 = 7
+L3 = 2
+L4 = 4.5
+
+JR = 0.75/2 * 1.5
+arm_height = 1.25
+
+sin = lambda x: np.sin(x)
+cos = lambda x: np.cos(x)
+flipx = lambda tup: (-tup[0], tup[1], tup[2])
+flipz = lambda tup: (tup[0], tup[1], -tup[2])
+
+# Right Arm
+
+# Defaults
+# theta = 0
+# phi = 90
+# alpha = 180
+
+theta = 45
+phi = 45
+alpha = 90
+
+theta = np.radians(theta)
+phi = np.radians(phi)
+alpha = np.radians(alpha)
+
+P1 = (L1/2 * cos(theta), y + L1/2 * sin(theta), z)
+R1 = (0, 0, theta)
+add_cube(location=P1, rotation=R1, scale=(L1, 0.75, arm_height), n="Monitor Arm R1")
+
+P2 = (L1 * cos(theta) + L2/2 * sin(phi), y + L1 * sin(theta) - L2/2 * cos(phi), z)
+R2 = (0, 0, phi - np.pi/2)
+add_cube(location=P2, rotation=R2, scale=(L2, 0.75, arm_height), n="Monitor Arm R2")
+
+P3 = (L1 * cos(theta) + L2 * sin(phi) - L3/2 * cos(alpha), y + L1 * sin(theta) - L2 * cos(phi) - L3/2 * sin(alpha), z)
+R3 = (0, 0, alpha)
+add_cube(location=P3, rotation=R3, scale=(L3, 0.75, arm_height), n="Monitor Arm R3")
+
+P4 = (L1 * cos(theta) + L2 * sin(phi) - L3 * cos(alpha), y + L1 * sin(theta) - L2 * cos(phi) - L3 * sin(alpha), z)
+R4 = R3
+add_cube(location=P4, rotation=R4, scale=(0.1, L4, L4), n="Monitor Arm R4")
+
+J1 = (L1 * cos(theta), y + L1 * sin(theta), z)
+add_cylinder(location=J1, radius=JR, height=arm_height * 1.1, n="Monitor Arm RJ1")
+
+J2 = (L1 * cos(theta) + L2 * sin(phi), y + L1 * sin(theta) - L2 * cos(phi), z)
+add_cylinder(location=J2, radius=JR, height=arm_height * 1.1, n="Monitor Arm RJ2")
+
+# Left Arm
+
+# Defaults
+# theta = 0
+# phi = 90
+# alpha = 180
+
+theta = 45
+phi = 45
+alpha = 90
+
+theta = np.radians(theta)
+phi = np.radians(phi)
+alpha = np.radians(alpha)
+
+P1 = (L1/2 * cos(theta), y + L1/2 * sin(theta), z)
+R1 = (0, 0, theta)
+add_cube(location=flipx(P1), rotation=flipz(R1), scale=(L1, 0.75, arm_height), n="Monitor Arm L1")
+
+P2 = (L1 * cos(theta) + L2/2 * sin(phi), y + L1 * sin(theta) - L2/2 * cos(phi), z)
+R2 = (0, 0, phi - np.pi/2)
+add_cube(location=flipx(P2), rotation=flipz(R2), scale=(L2, 0.75, arm_height), n="Monitor Arm L2")
+
+P3 = (L1 * cos(theta) + L2 * sin(phi) - L3/2 * cos(alpha), y + L1 * sin(theta) - L2 * cos(phi) - L3/2 * sin(alpha), z)
+R3 = (0, 0, alpha)
+add_cube(location=flipx(P3), rotation=flipz(R3), scale=(L3, 0.75, arm_height), n="Monitor Arm L3")
+
+P4 = (L1 * cos(theta) + L2 * sin(phi) - L3 * cos(alpha), y + L1 * sin(theta) - L2 * cos(phi) - L3 * sin(alpha), z)
+R4 = R3
+add_cube(location=flipx(P4), rotation=flipz(R4), scale=(0.1, L4, L4), n="Monitor Arm L4")
+
+J1 = (L1 * cos(theta), y + L1 * sin(theta), z)
+add_cylinder(location=flipx(J1), radius=JR, height=arm_height * 1.1, n="Monitor Arm LJ1")
+
+J2 = (L1 * cos(theta) + L2 * sin(phi), y + L1 * sin(theta) - L2 * cos(phi), z)
+add_cylinder(location=flipx(J2), radius=JR, height=arm_height * 1.1, n="Monitor Arm LJ2")
+
+
 # Save
 save()
