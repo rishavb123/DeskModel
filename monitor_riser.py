@@ -100,8 +100,8 @@ add_cylinder(location=(0, 3.5, 6), radius=2, height=0.3, n="Monitor Arm Holding 
 y = 3.5
 z = 18
 
-L1 = 6 + cylinder_r
-L2 = 7
+L1 = 6.5 + cylinder_r
+L2 = 7.5
 L3 = 2
 L4 = 4.5
 
@@ -120,9 +120,9 @@ flipz = lambda tup: (tup[0], tup[1], -tup[2])
 # phi = 90
 # alpha = 180
 
-theta = 45
+theta = -20
 phi = 45
-alpha = 90
+alpha = 60
 
 theta = np.radians(theta)
 phi = np.radians(phi)
@@ -150,6 +150,11 @@ add_cylinder(location=J1, radius=JR, height=arm_height * 1.1, n="Monitor Arm RJ1
 J2 = (L1 * cos(theta) + L2 * sin(phi), y + L1 * sin(theta) - L2 * cos(phi), z)
 add_cylinder(location=J2, radius=JR, height=arm_height * 1.1, n="Monitor Arm RJ2")
 
+T = 2
+P5 = (L1 * cos(theta) + L2 * sin(phi) - (L3 + T / 2) * cos(alpha), y + L1 * sin(theta) - L2 * cos(phi) - (L3 + T / 2) * sin(alpha), z)
+R5 = R3
+add_cube(location=P5, rotation=R5, scale=(T, 21.5, 12.75), n="Monitor R")
+
 # Left Arm
 
 # Defaults
@@ -157,8 +162,12 @@ add_cylinder(location=J2, radius=JR, height=arm_height * 1.1, n="Monitor Arm RJ2
 # phi = 90
 # alpha = 180
 
-theta = 45
-phi = 45
+# theta = 45
+# phi = 45
+# alpha = 90
+
+theta = 15
+phi = 55
 alpha = 90
 
 theta = np.radians(theta)
@@ -187,6 +196,10 @@ add_cylinder(location=flipx(J1), radius=JR, height=arm_height * 1.1, n="Monitor 
 J2 = (L1 * cos(theta) + L2 * sin(phi), y + L1 * sin(theta) - L2 * cos(phi), z)
 add_cylinder(location=flipx(J2), radius=JR, height=arm_height * 1.1, n="Monitor Arm LJ2")
 
+T = 2
+P5 = (L1 * cos(theta) + L2 * sin(phi) - (L3 + T / 2) * cos(alpha), y + L1 * sin(theta) - L2 * cos(phi) - (L3 + T / 2) * sin(alpha), z)
+R5 = R3
+add_cube(location=flipx(P5), rotation=flipz(R5), scale=(T, 25, 14), n="Monitor L")
 
 # Save
 save()
